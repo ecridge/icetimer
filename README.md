@@ -19,7 +19,7 @@ Compilation
 
 If there is no binary available for your system then you can compile IceTimer
 from its source files using the Processing IDE, the latest version of which
-can be downloaded from <http://processing.org/download/>.
+can be downloaded from <https://processing.org/download/>.
 
 Make sure that all of the .pde files and the data folder are together within
 the same parent folder - this should already be the case if you have
@@ -79,7 +79,8 @@ version.
 
 This program is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE. See LICENSE.txt.
+FOR A PARTICULAR PURPOSE.  
+See [LICENSE.txt](https://github.com/joecridge/IceTimer/blob/master/LICENSE.txt).
 
-Joe Cridge, July 2014.
+Joe Cridge, July 2014.  
 <mailto:joe.cridge@me.com>
