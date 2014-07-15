@@ -1,0 +1,7 @@
+clubName,ALTS
+halfIceThreshold,7
+thirdIceThreshold,11
+sessionEndHour,01,01,01,01,01,01,01
+sessionEndMins,00,00,10,10,10,00,00
+expectedTeams,10
+matchLength,180
