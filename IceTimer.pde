@@ -140,7 +140,7 @@ String dayName() {
   Calendar c = Calendar.getInstance();
   int day = c.get(Calendar.DAY_OF_WEEK);
   String names[] = {
-    "Sunday", "Monday", "Tuseday", "Wednesday", "Thursday", "Friday", "Saturday"
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
   };
   return names[day-1];
 }

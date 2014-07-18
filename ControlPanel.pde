@@ -62,7 +62,7 @@ class ControlPanel {
     startButton = new Button(894, 62, "START", highlightColour, TIMER_GREY);
     endButton = new Button(894, 104, "END", highlightColour, TIMER_GREY);
 
-    // Disable <END> button
+    // Disable 'END' button
     endButton.isActive = false;
   }
 
@@ -74,7 +74,7 @@ class ControlPanel {
     simRadio.isActive = true;
     startButton.isActive = true;
 
-    // Disable <END> button
+    // Disable 'END' button
     endButton.isActive = false;
 
     // Flag change
@@ -118,7 +118,7 @@ class ControlPanel {
     simRadio.isActive = false;
     startButton.isActive = false;
 
-    // Enable <END> button
+    // Enable 'END' button
     endButton.isActive = true;
 
     // Flag change
