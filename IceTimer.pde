@@ -194,5 +194,9 @@ void toggleFullScreen() {
   // Use first path for OSX, second for Windows
   //saveStrings("IceTimer.app/Contents/Java/data/prefs.csv", prefStrings);
   saveStrings("data/prefs.csv", prefStrings);
+
+  // Show that the change has been made
+  String newTitle = fullScreen ? "Full screen on restart" : "Windowed on restart";
+  controlPanel.setTitle(newTitle);
 }
 

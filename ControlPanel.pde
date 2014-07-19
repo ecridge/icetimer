@@ -223,5 +223,9 @@ class ControlPanel {
     startButton.setActiveColour(newColour);
     endButton.setActiveColour(newColour);
   }
+
+  void setTitle(String newTitle) {
+    title = newTitle;
+  }
 }
 
