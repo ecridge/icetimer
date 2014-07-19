@@ -29,9 +29,10 @@ class MatchList {
   final int[] CELL_WIDTHS = {
     364, 364, 600, 900
   };
-  final int LIST_SIZE = 4;
+  final int CELL_HEIGHT = 175;
+  final int LIST_HEIGHT = 700;
 
-  int cellWidth, cellHeight, linePadding, xStart, yStart, matchLength, currentGame;
+  int cellWidth, cellHeight, linePadding, xStart, yStart, listLength, matchLength, currentGame;
   int startMillis, millisElapsed, millisRemaining;
   float progress;
   boolean isActive, inGame;
@@ -44,10 +45,11 @@ class MatchList {
 
     // Determine cell dimensions
     cellWidth = CELL_WIDTHS[nSimGames_];
-    cellHeight = int(height/LIST_SIZE);
+    cellHeight = CELL_HEIGHT;
+    listLength = ceil((height-190.0)/CELL_HEIGHT) + 1;
     linePadding = LINE_PADDINGS[nSimGames_];   
     xStart = (width-cellWidth)/2;
-    yStart = (150+height-40)/2 - cellHeight/2;
+    yStart = (150+LIST_HEIGHT-40)/2 - cellHeight/2;
 
     // Initialise
     currentGame = 1;
@@ -57,8 +59,8 @@ class MatchList {
 
     // Create and fill cells with blank data for now
     matches = new Table();
-    cells = new Cell[LIST_SIZE+1];
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    cells = new Cell[listLength];
+    for (int i = 0; i < listLength; i++) {
       cells[i] = new Cell(i, matches.getRow(i), xStart, yStart+(i-1)*cellHeight, cellWidth, cellHeight);
     }
   }
@@ -71,7 +73,7 @@ class MatchList {
     cellWidth = CELL_WIDTHS[nSimGames_];
     linePadding = LINE_PADDINGS[nSimGames_]; 
     xStart = (width-cellWidth)/2;
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].isActive = false;
       cells[i].setXPos(xStart);
       cells[i].setWidth(cellWidth);
@@ -146,7 +148,7 @@ class MatchList {
     }
 
     // Dsiplay cells
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].display();
     }
   }
@@ -157,7 +159,7 @@ class MatchList {
 
     // Clear cells
     matches = new Table();
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].isActive = false;
       cells[i].isTicking = false;
       cells[i].setFixture(matches.getRow(i));
@@ -168,7 +170,7 @@ class MatchList {
 
   void offsetCells(float percentage) {
     // Scrolls cells upwards as game progresses
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       int offsetYPos = round(yStart+(i-1)*cellHeight-percentage*cellHeight);
       cells[i].setYPos(offsetYPos);
     }
@@ -194,7 +196,7 @@ class MatchList {
 
   void populateCells() {
     // Fills cells with match data
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       // Loop indeces round
       int idx = (i+currentGame-2)%50 < 0 ? (i+currentGame-2)%50+50 : (i+currentGame-2)%50;
       cells[i].setFixture(matches.getRow(idx));
@@ -250,7 +252,7 @@ class MatchList {
   void toggleMiniButtons() {
     // Toggles between wide and mini (square) match buttons
     boolean newSetting = !(cells[0].miniButtons);
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].miniButtons = newSetting;
       cells[i].updateButtons();
     }
