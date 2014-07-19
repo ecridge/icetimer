@@ -55,12 +55,14 @@ class ControlPanel {
     };
 
     // Create widgets
-    hourSpinner = new Spinner(486, 82, endHour_, 0, 23, 1, highlightColour, TIMER_GREY);
-    minSpinner = new Spinner(556, 82, endMin_, 0, 55, 5, highlightColour, TIMER_GREY);
-    teamSpinner = new Spinner(486, 110, nTeams_, 3, 30, 1, highlightColour, TIMER_GREY);
-    simRadio = new Radio(657, 53, labels, nSim_-1, highlightColour, TIMER_GREY);
-    startButton = new Button(894, 62, "START", highlightColour, TIMER_GREY);
-    endButton = new Button(894, 104, "END", highlightColour, TIMER_GREY);
+    // Padding offset is used to cope with different screen sizes
+    int xOffset = max(0, width/2-571);
+    hourSpinner = new Spinner(486+xOffset, 82, endHour_, 0, 23, 1, highlightColour, TIMER_GREY);
+    minSpinner = new Spinner(556+xOffset, 82, endMin_, 0, 55, 5, highlightColour, TIMER_GREY);
+    teamSpinner = new Spinner(486+xOffset, 110, nTeams_, 3, 30, 1, highlightColour, TIMER_GREY);
+    simRadio = new Radio(657+xOffset, 53, labels, nSim_-1, highlightColour, TIMER_GREY);
+    startButton = new Button(width-1000 >= 40 ? width-116 : width-106, 62, "START", highlightColour, TIMER_GREY);
+    endButton = new Button(width-1000 >= 40 ? width-116 : width-106, 104, "END", highlightColour, TIMER_GREY);
 
     // Disable 'END' button
     endButton.isActive = false;
@@ -126,6 +128,9 @@ class ControlPanel {
   }
 
   void display() {
+    // Introduce variable padding to cope with different screen sizes
+    int xOffset = max(0, width/2-571);
+
     // Draw shadow
     for (int i = 0; i < 15; i++) {
       fill(0, 0, 0, 90-6*i);
@@ -144,7 +149,7 @@ class ControlPanel {
     textFont(panelFont);
     textAlign(LEFT);
     fill(TIMER_GREY);
-    text(title, 356, 53);
+    text(title, 356+xOffset, 53);
 
     // Print labels
     if (isActive) {
@@ -152,9 +157,9 @@ class ControlPanel {
     } else {
       fill(TIMER_GREY);
     }
-    text("End time", 356, 83);
-    text(":", 542, 82);
-    text("Teams", 356, 111);
+    text("End time", 356+xOffset, 83);
+    text(":", 542+xOffset, 82);
+    text("Teams", 356+xOffset, 111);
 
     // Display widgets
     hourSpinner.display();
