@@ -29,7 +29,7 @@ final color TIMER_GREEN = color(0, 175, 0);
 final color TIMER_AMBER = color(220, 130, 0);
 final color TIMER_RED = color(195, 0, 0);
 
-boolean inSession;
+boolean inSession, fullScreen;
 color highlight;
 
 ControlPanel controlPanel;
@@ -40,12 +40,6 @@ void setup() {
   // Initialise global variables
   inSession = false;
   highlight = TIMER_GREEN;
-
-  // Initialise frame
-  size(1000, 700);
-  background(highlight);
-  noStroke();
-  smooth();
 
   // Load preferences
   Table prefs = loadTable("prefs.csv");
@@ -63,6 +57,17 @@ void setup() {
   } else {
     nSim = 3;
   }
+  fullScreen = boolean(prefs.getString(7, 1));
+
+  // Initialise frame
+  if (fullScreen) {
+    size(displayWidth, displayHeight);
+  } else {
+    size(1000, 700);
+  }
+  background(highlight);
+  noStroke();
+  smooth();
 
   // Create interface components
   String clubName = prefs.getString(0, 1);
@@ -111,6 +116,8 @@ void keyPressed() {
     matchList.playPause();
   } else if (key == 'C') {
     matchList.toggleMiniButtons();
+  } else if (key == 'F') {
+    toggleFullScreen();
   }
 }
 
@@ -169,5 +176,23 @@ void startSession() {
   sessionBar.activate(endHour, endMin);
   matchList.activate(nSim);
   matchList.reloadMatches(nTeams, nSim);
+}
+
+boolean sketchFullScreen() {
+  // Decide whether to enter full screen using prefs.csv
+  Table prefs = loadTable("prefs.csv");
+  boolean fullScreen = boolean(prefs.getString(7, 1));
+  return fullScreen;
+}
+
+void toggleFullScreen() {
+  // Changes the saved preference for full screen or windowed mode
+  fullScreen = !fullScreen;
+  String[] prefStrings = loadStrings("prefs.csv");
+  prefStrings[7] = "fullScreen," + str(fullScreen);
+  
+  // Use first path for OSX, second for Windows
+  //saveStrings("IceTimer.app/Contents/Java/data/prefs.csv", prefStrings);
+  saveStrings("data/prefs.csv", prefStrings);
 }
 
