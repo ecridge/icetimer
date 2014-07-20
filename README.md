@@ -64,11 +64,12 @@ the program is running; changes take effect when the program is restarted.
 Version History
 ---------------
 
+```
 v1.1  + Added full screen mode
       * Minor fixes
 
 v1.0  + Initial release
-
+```
 
 Credits
 -------
