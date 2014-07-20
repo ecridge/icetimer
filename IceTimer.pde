@@ -80,7 +80,7 @@ void setup() {
   // Set window properties
   ImageIcon titlebaricon = new ImageIcon(loadBytes("images/icon_16.gif"));
   frame.setIconImage(titlebaricon.getImage());
-  frame.setTitle(panelTitle + " | IceTimer 1.0");
+  frame.setTitle(panelTitle + " | IceTimer 1.1");
 }
 
 void draw() {

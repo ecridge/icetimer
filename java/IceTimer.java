@@ -45,7 +45,7 @@ final int TIMER_GREEN = color(0, 175, 0);
 final int TIMER_AMBER = color(220, 130, 0);
 final int TIMER_RED = color(195, 0, 0);
 
-boolean inSession;
+boolean inSession, fullScreen;
 int highlight;
 
 ControlPanel controlPanel;
@@ -56,12 +56,6 @@ public void setup() {
   // Initialise global variables
   inSession = false;
   highlight = TIMER_GREEN;
-
-  // Initialise frame
-  size(1000, 700);
-  background(highlight);
-  noStroke();
-  smooth();
 
   // Load preferences
   Table prefs = loadTable("prefs.csv");
@@ -79,6 +73,17 @@ public void setup() {
   } else {
     nSim = 3;
   }
+  fullScreen = PApplet.parseBoolean(prefs.getString(7, 1));
+
+  // Initialise frame
+  if (fullScreen) {
+    size(displayWidth, displayHeight);
+  } else {
+    size(1000, 700);
+  }
+  background(highlight);
+  noStroke();
+  smooth();
 
   // Create interface components
   String clubName = prefs.getString(0, 1);
@@ -91,7 +96,7 @@ public void setup() {
   // Set window properties
   ImageIcon titlebaricon = new ImageIcon(loadBytes("images/icon_16.gif"));
   frame.setIconImage(titlebaricon.getImage());
-  frame.setTitle(panelTitle + " | IceTimer 1.0");
+  frame.setTitle(panelTitle + " | IceTimer 1.1");
 }
 
 public void draw() {
@@ -127,6 +132,8 @@ public void keyPressed() {
     matchList.playPause();
   } else if (key == 'C') {
     matchList.toggleMiniButtons();
+  } else if (key == 'F') {
+    toggleFullScreen();
   }
 }
 
@@ -156,7 +163,7 @@ public String dayName() {
   Calendar c = Calendar.getInstance();
   int day = c.get(Calendar.DAY_OF_WEEK);
   String names[] = {
-    "Sunday", "Monday", "Tuseday", "Wednesday", "Thursday", "Friday", "Saturday"
+    "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
   };
   return names[day-1];
 }
@@ -185,6 +192,28 @@ public void startSession() {
   sessionBar.activate(endHour, endMin);
   matchList.activate(nSim);
   matchList.reloadMatches(nTeams, nSim);
+}
+
+public boolean sketchFullScreen() {
+  // Decide whether to enter full screen using prefs.csv
+  Table prefs = loadTable("prefs.csv");
+  boolean fullScreen = PApplet.parseBoolean(prefs.getString(7, 1));
+  return fullScreen;
+}
+
+public void toggleFullScreen() {
+  // Changes the saved preference for full screen or windowed mode
+  fullScreen = !fullScreen;
+  String[] prefStrings = loadStrings("prefs.csv");
+  prefStrings[7] = "fullScreen," + str(fullScreen);
+
+  // Use first path for OSX, second for Windows
+  //saveStrings("IceTimer.app/Contents/Java/data/prefs.csv", prefStrings);
+  saveStrings("data/prefs.csv", prefStrings);
+
+  // Show that the change has been made
+  String newTitle = fullScreen ? "Full screen on restart" : "Windowed on restart";
+  controlPanel.setTitle(newTitle);
 }
 
 //    
@@ -553,14 +582,16 @@ class ControlPanel {
     };
 
     // Create widgets
-    hourSpinner = new Spinner(486, 82, endHour_, 0, 23, 1, highlightColour, TIMER_GREY);
-    minSpinner = new Spinner(556, 82, endMin_, 0, 55, 5, highlightColour, TIMER_GREY);
-    teamSpinner = new Spinner(486, 110, nTeams_, 3, 30, 1, highlightColour, TIMER_GREY);
-    simRadio = new Radio(657, 53, labels, nSim_-1, highlightColour, TIMER_GREY);
-    startButton = new Button(894, 62, "START", highlightColour, TIMER_GREY);
-    endButton = new Button(894, 104, "END", highlightColour, TIMER_GREY);
+    // Padding offset is used to cope with different screen sizes
+    int xOffset = max(0, width/2-571);
+    hourSpinner = new Spinner(486+xOffset, 82, endHour_, 0, 23, 1, highlightColour, TIMER_GREY);
+    minSpinner = new Spinner(556+xOffset, 82, endMin_, 0, 55, 5, highlightColour, TIMER_GREY);
+    teamSpinner = new Spinner(486+xOffset, 110, nTeams_, 3, 30, 1, highlightColour, TIMER_GREY);
+    simRadio = new Radio(657+xOffset, 53, labels, nSim_-1, highlightColour, TIMER_GREY);
+    startButton = new Button(width-1000 >= 40 ? width-116 : width-106, 62, "START", highlightColour, TIMER_GREY);
+    endButton = new Button(width-1000 >= 40 ? width-116 : width-106, 104, "END", highlightColour, TIMER_GREY);
 
-    // Disable <END> button
+    // Disable 'END' button
     endButton.isActive = false;
   }
 
@@ -572,7 +603,7 @@ class ControlPanel {
     simRadio.isActive = true;
     startButton.isActive = true;
 
-    // Disable <END> button
+    // Disable 'END' button
     endButton.isActive = false;
 
     // Flag change
@@ -616,7 +647,7 @@ class ControlPanel {
     simRadio.isActive = false;
     startButton.isActive = false;
 
-    // Enable <END> button
+    // Enable 'END' button
     endButton.isActive = true;
 
     // Flag change
@@ -624,6 +655,9 @@ class ControlPanel {
   }
 
   public void display() {
+    // Introduce variable padding to cope with different screen sizes
+    int xOffset = max(0, width/2-571);
+
     // Draw shadow
     for (int i = 0; i < 15; i++) {
       fill(0, 0, 0, 90-6*i);
@@ -642,7 +676,7 @@ class ControlPanel {
     textFont(panelFont);
     textAlign(LEFT);
     fill(TIMER_GREY);
-    text(title, 356, 53);
+    text(title, 356+xOffset, 53);
 
     // Print labels
     if (isActive) {
@@ -650,9 +684,9 @@ class ControlPanel {
     } else {
       fill(TIMER_GREY);
     }
-    text("End time", 356, 83);
-    text(":", 542, 82);
-    text("Teams", 356, 111);
+    text("End time", 356+xOffset, 83);
+    text(":", 542+xOffset, 82);
+    text("Teams", 356+xOffset, 111);
 
     // Display widgets
     hourSpinner.display();
@@ -715,6 +749,10 @@ class ControlPanel {
     simRadio.setActiveColour(newColour);
     startButton.setActiveColour(newColour);
     endButton.setActiveColour(newColour);
+  }
+
+  public void setTitle(String newTitle) {
+    title = newTitle;
   }
 }
 
@@ -837,9 +875,10 @@ class MatchList {
   final int[] CELL_WIDTHS = {
     364, 364, 600, 900
   };
-  final int LIST_SIZE = 4;
+  final int CELL_HEIGHT = 175;
+  final int LIST_HEIGHT = 700;
 
-  int cellWidth, cellHeight, linePadding, xStart, yStart, matchLength, currentGame;
+  int cellWidth, cellHeight, linePadding, xStart, yStart, listLength, matchLength, currentGame;
   int startMillis, millisElapsed, millisRemaining;
   float progress;
   boolean isActive, inGame;
@@ -852,10 +891,11 @@ class MatchList {
 
     // Determine cell dimensions
     cellWidth = CELL_WIDTHS[nSimGames_];
-    cellHeight = PApplet.parseInt(height/LIST_SIZE);
+    cellHeight = CELL_HEIGHT;
+    listLength = ceil((height-190.0f)/CELL_HEIGHT) + 1;
     linePadding = LINE_PADDINGS[nSimGames_];   
     xStart = (width-cellWidth)/2;
-    yStart = (150+height-40)/2 - cellHeight/2;
+    yStart = (150+LIST_HEIGHT-40)/2 - cellHeight/2;
 
     // Initialise
     currentGame = 1;
@@ -865,8 +905,8 @@ class MatchList {
 
     // Create and fill cells with blank data for now
     matches = new Table();
-    cells = new Cell[LIST_SIZE+1];
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    cells = new Cell[listLength];
+    for (int i = 0; i < listLength; i++) {
       cells[i] = new Cell(i, matches.getRow(i), xStart, yStart+(i-1)*cellHeight, cellWidth, cellHeight);
     }
   }
@@ -879,7 +919,7 @@ class MatchList {
     cellWidth = CELL_WIDTHS[nSimGames_];
     linePadding = LINE_PADDINGS[nSimGames_]; 
     xStart = (width-cellWidth)/2;
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].isActive = false;
       cells[i].setXPos(xStart);
       cells[i].setWidth(cellWidth);
@@ -954,7 +994,7 @@ class MatchList {
     }
 
     // Dsiplay cells
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].display();
     }
   }
@@ -965,7 +1005,7 @@ class MatchList {
 
     // Clear cells
     matches = new Table();
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].isActive = false;
       cells[i].isTicking = false;
       cells[i].setFixture(matches.getRow(i));
@@ -976,7 +1016,7 @@ class MatchList {
 
   public void offsetCells(float percentage) {
     // Scrolls cells upwards as game progresses
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       int offsetYPos = round(yStart+(i-1)*cellHeight-percentage*cellHeight);
       cells[i].setYPos(offsetYPos);
     }
@@ -1002,7 +1042,7 @@ class MatchList {
 
   public void populateCells() {
     // Fills cells with match data
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       // Loop indeces round
       int idx = (i+currentGame-2)%50 < 0 ? (i+currentGame-2)%50+50 : (i+currentGame-2)%50;
       cells[i].setFixture(matches.getRow(idx));
@@ -1058,7 +1098,7 @@ class MatchList {
   public void toggleMiniButtons() {
     // Toggles between wide and mini (square) match buttons
     boolean newSetting = !(cells[0].miniButtons);
-    for (int i = 0; i < LIST_SIZE+1; i++) {
+    for (int i = 0; i < listLength; i++) {
       cells[i].miniButtons = newSetting;
       cells[i].updateButtons();
     }
