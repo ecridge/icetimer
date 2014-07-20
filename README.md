@@ -23,7 +23,7 @@ can be downloaded from <https://processing.org/download/>.
 
 Make sure that all of the .pde files and the data folder are together within
 the same parent folder - this should already be the case if you have
-downloaded and extracted the IceTimer-1.0-Source.zip archive. Use the IDE to
+downloaded and extracted the IceTimer-1.1-Source.zip archive. Use the IDE to
 open the file IceTimer.pde and choose 'Sketch' > 'Run' from the menu to check
 that everything is working. You can then export an application for your system
 by choosing 'File' > 'Export Application'.
@@ -42,8 +42,8 @@ can end the session by pressing 'END' in order to change the session details
 (e.g. if more teams arrive).
 
 The current game is highlighted in the match list and will respond to presses
-of the play/pause and skip/end button controls, the latter of which advance
-the current game to the next game in the match list. The highlight will change
+of the play/pause and skip button controls, the latter of which advances the
+current game to the next game in the match list. The highlight will change
 colour to indicate when there are 30 seconds and 10 seconds left in the
 current game.
 
@@ -56,6 +56,18 @@ The match list will slowly scroll up the screen as games are played. The
 horizontal bars indicate the current position in the list and within the
 current game, so it should be easy to tell the teams who will be on next from
 those who are on now.
+
+You can toggle between full screen and windowed mode by pressing Shift-F while
+the program is running; changes take effect when the program is restarted.
+
+
+Version History
+---------------
+
+v1.1  + Added full screen mode
+      * Minor fixes
+
+v1.0  + Initial release
 
 
 Credits
