@@ -99,5 +99,5 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  
 See [LICENSE.txt](https://github.com/joecridge/IceTimer/blob/master/LICENSE.txt).
 
-Joe Cridge, February 2015.
+Joe Cridge, February 2015.  
 <mailto:joe.cridge@me.com>
