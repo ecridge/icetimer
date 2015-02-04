@@ -88,7 +88,7 @@ class MatchList {
   }
 
 
-  void advanceGame() {
+  void advanceGame(int step) {
     inGame = false;
 
     // Reset selected cell
@@ -105,7 +105,10 @@ class MatchList {
     // Realign cells with 'now' line
     offsetCells(progress);
 
-    currentGame += 1;
+    currentGame += step;
+    if (currentGame < 0) {
+      currentGame += 100;
+    }
     populateCells();
   }
 
@@ -155,7 +158,7 @@ class MatchList {
 
   void deactivate() {
     // End game and tidy up
-    advanceGame();
+    advanceGame(1);
 
     // Clear cells
     matches = new Table();
@@ -253,7 +256,7 @@ class MatchList {
       } else if (cells[1].skipPressed) {
         cells[1].skipPressed = false;
         // End game
-        advanceGame();
+        advanceGame(1);
       }
     }
   }
@@ -306,7 +309,7 @@ class MatchList {
       offsetCells(progress);
     } else if (isActive && inGame) {
       // End game
-      advanceGame();
+      advanceGame(1);
     }
   }
 }

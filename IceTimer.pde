@@ -114,6 +114,10 @@ void draw() {
 void keyPressed() {
   if (key == ' ') {
     matchList.playPause();
+  } else if (key == '+') {
+    matchList.advanceGame(1);
+  } else if (key == '_') {
+    matchList.advanceGame(-1);
   } else if (key == 'C') {
     matchList.toggleMiniButtons();
   } else if (key == 'F') {
