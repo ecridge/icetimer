@@ -181,6 +181,31 @@ class MatchList {
     cells[1].isTicking = false;
     cells[1].updateButtons();
   }
+  
+  Table permuteTableRows(Table inTable, int nSimGames) {
+    // Creates and returns a new table based on one read from a CSV file, but with its rows permuted by random amounts.
+    
+    // Note: This is not pretty! The Table class is horrible and passed by reference hence the fiddly order of operations here.
+    // Updating the whole program to work with arrays rather than Tables would be a good idea!
+    
+    // Copy first row as is (and create the necessary column structure)
+    Table outTable = new Table();
+    outTable.addRow();
+    for (int j = 0; j < nSimGames*2; j++) {
+      outTable.addColumn();
+      outTable.setInt(0, j, inTable.getInt(0, j));
+    }
+    
+    // Copy the remaining rows with random permutations
+    for (int i = 1; i < 50; i++) {
+      outTable.addRow();
+      int offset = 2*int(random(nSimGames));
+      for (int j = 0; j < nSimGames*2; j++) {
+        outTable.setInt(i, j, inTable.getInt(i, (j+offset)%(nSimGames*2)));
+      }
+    }
+    return outTable;
+  }
 
   void playPause() {
     // Interprets spacebar press
@@ -207,7 +232,8 @@ class MatchList {
   void reloadMatches(int numTeams, int numSimGames) {
     // Loads new match list from file and repopulates cells
     String fixtureFile = "nsim-nteams/" + numSimGames + "-" + numTeams + ".csv";
-    matches = loadTable(fixtureFile);
+    Table tempTable = loadTable(fixtureFile);
+    matches = permuteTableRows(tempTable, numSimGames);
     populateCells();
   }
 
