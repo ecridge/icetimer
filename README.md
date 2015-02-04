@@ -50,7 +50,8 @@ current game.
 When the timer reaches zero, the current game will automatically be advanced
 but the clock for the next game will not start until the play button is
 pressed; this gives time for the new teams to be read out. You can also use
-the spacebar instead of the play/pause button.
+the spacebar instead of the play/pause button, and Shift-`+` and Shift-`–` to
+move freely between games.
 
 The match list will slowly scroll up the screen as games are played. The
 horizontal bars indicate the current position in the list and within the
@@ -65,6 +66,9 @@ Version History
 ---------------
 
 ```
+v1.2  + Added Shift-`+` and Shift-`–` shortcuts to move freely between games
+      * Match locations within rink are now randomly chosen
+
 v1.1  + Added full screen mode
       * Minor fixes
 
@@ -83,7 +87,7 @@ IceTimer is written in Java using [Processing](https://processing.org/).
 License
 -------
 
-Copyright (C) 2014 Joe Cridge.
+Copyright (C) 2014–2015 Joe Cridge.
 
 This program is free software: you can redistribute it and/or modify it under
 the terms of the GNU General Public License as published by the Free Software
@@ -95,5 +99,5 @@ ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE.  
 See [LICENSE.txt](https://github.com/joecridge/IceTimer/blob/master/LICENSE.txt).
 
-Joe Cridge, July 2014.  
+Joe Cridge, February 2015.
 <mailto:joe.cridge@me.com>
