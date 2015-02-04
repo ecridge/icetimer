@@ -96,7 +96,7 @@ public void setup() {
   // Set window properties
   ImageIcon titlebaricon = new ImageIcon(loadBytes("images/icon_16.gif"));
   frame.setIconImage(titlebaricon.getImage());
-  frame.setTitle(panelTitle + " | IceTimer 1.1");
+  frame.setTitle(panelTitle + " | IceTimer 1.2");
 }
 
 public void draw() {
@@ -130,6 +130,10 @@ public void draw() {
 public void keyPressed() {
   if (key == ' ') {
     matchList.playPause();
+  } else if (key == '+') {
+    matchList.advanceGame(1);
+  } else if (key == '_') {
+    matchList.advanceGame(-1);
   } else if (key == 'C') {
     matchList.toggleMiniButtons();
   } else if (key == 'F') {
@@ -934,7 +938,7 @@ class MatchList {
   }
 
 
-  public void advanceGame() {
+  public void advanceGame(int step) {
     inGame = false;
 
     // Reset selected cell
@@ -951,7 +955,10 @@ class MatchList {
     // Realign cells with 'now' line
     offsetCells(progress);
 
-    currentGame += 1;
+    currentGame += step;
+    if (currentGame < 0) {
+      currentGame += 100;
+    }
     populateCells();
   }
 
@@ -1001,7 +1008,7 @@ class MatchList {
 
   public void deactivate() {
     // End game and tidy up
-    advanceGame();
+    advanceGame(1);
 
     // Clear cells
     matches = new Table();
@@ -1026,6 +1033,31 @@ class MatchList {
     inGame = false;
     cells[1].isTicking = false;
     cells[1].updateButtons();
+  }
+  
+  public Table permuteTableRows(Table inTable, int nSimGames) {
+    // Creates and returns a new table based on one read from a CSV file, but with its rows permuted by random amounts.
+    
+    // Note: This is not pretty! The Table class is horrible and passed by reference hence the fiddly order of operations here.
+    // Updating the whole program to work with arrays rather than Tables would be a good idea!
+    
+    // Copy first row as is (and create the necessary column structure)
+    Table outTable = new Table();
+    outTable.addRow();
+    for (int j = 0; j < nSimGames*2; j++) {
+      outTable.addColumn();
+      outTable.setInt(0, j, inTable.getInt(0, j));
+    }
+    
+    // Copy the remaining rows with random permutations
+    for (int i = 1; i < 50; i++) {
+      outTable.addRow();
+      int offset = 2*PApplet.parseInt(random(nSimGames));
+      for (int j = 0; j < nSimGames*2; j++) {
+        outTable.setInt(i, j, inTable.getInt(i, (j+offset)%(nSimGames*2)));
+      }
+    }
+    return outTable;
   }
 
   public void playPause() {
@@ -1053,7 +1085,8 @@ class MatchList {
   public void reloadMatches(int numTeams, int numSimGames) {
     // Loads new match list from file and repopulates cells
     String fixtureFile = "nsim-nteams/" + numSimGames + "-" + numTeams + ".csv";
-    matches = loadTable(fixtureFile);
+    Table tempTable = loadTable(fixtureFile);
+    matches = permuteTableRows(tempTable, numSimGames);
     populateCells();
   }
 
@@ -1073,7 +1106,7 @@ class MatchList {
       } else if (cells[1].skipPressed) {
         cells[1].skipPressed = false;
         // End game
-        advanceGame();
+        advanceGame(1);
       }
     }
   }
@@ -1126,7 +1159,7 @@ class MatchList {
       offsetCells(progress);
     } else if (isActive && inGame) {
       // End game
-      advanceGame();
+      advanceGame(1);
     }
   }
 }

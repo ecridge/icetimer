@@ -80,7 +80,7 @@ void setup() {
   // Set window properties
   ImageIcon titlebaricon = new ImageIcon(loadBytes("images/icon_16.gif"));
   frame.setIconImage(titlebaricon.getImage());
-  frame.setTitle(panelTitle + " | IceTimer 1.1");
+  frame.setTitle(panelTitle + " | IceTimer 1.2");
 }
 
 void draw() {
@@ -194,7 +194,7 @@ void toggleFullScreen() {
   fullScreen = !fullScreen;
   String[] prefStrings = loadStrings("prefs.csv");
   prefStrings[7] = "fullScreen," + str(fullScreen);
-  
+
   // Use first path for OSX, second for Windows
   //saveStrings("IceTimer.app/Contents/Java/data/prefs.csv", prefStrings);
   saveStrings("data/prefs.csv", prefStrings);
