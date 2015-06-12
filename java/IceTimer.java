@@ -18,8 +18,8 @@ import java.io.IOException;
 public class IceTimer extends PApplet {
 
 //    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
+//    IceTimer – Graphical timer and match scheduler for pick-up ice hockey
+//    Copyright (C) 2014–2015 Joe Cridge
 //    
 //    This file is part of IceTimer.
 //    
@@ -36,9 +36,9 @@ public class IceTimer extends PApplet {
 //    You should have received a copy of the GNU General Public License
 //    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
 //    
-//    Joe Cridge, June 2014.
+//    Joe Cridge, February 2015.
 //    <joe.cridge@me.com>
-//
+//    
 
 final int TIMER_GREY = color(60);
 final int TIMER_GREEN = color(0, 175, 0);
@@ -220,29 +220,6 @@ public void toggleFullScreen() {
   controlPanel.setTitle(newTitle);
 }
 
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
-
 class Button {
   int xCentre, yCentre;
   boolean isActive, wasPressed;
@@ -295,29 +272,6 @@ class Button {
     activeColour = newColour;
   }
 }
-
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
 
 class Cell {
   int gameNo, nMatches, xPos, yPos, xSize, ySize, minLeft, secLeft;
@@ -529,29 +483,6 @@ class Cell {
   }
 }
 
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
-
 class ControlPanel {
   final int FULL_ICE = 0;
   final int HALF_ICE = 1;
@@ -760,29 +691,6 @@ class ControlPanel {
   }
 }
 
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
-
 class IconButton {
   // Button which displays an icon instead of a string label.
   // Icon should be a 48x48 pixel white/grayscale mask.
@@ -847,29 +755,6 @@ class IconButton {
     icon = newIcon;
   }
 }
-
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
 
 class MatchList {
   // Preset values
@@ -1164,29 +1049,6 @@ class MatchList {
   }
 }
 
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
-
 class Radio {
   final int DEACTIVATED = 0;
   final int DESELECTED = 1;
@@ -1318,29 +1180,6 @@ class Radio {
   }
 }
 
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
-
 class SessionBar {
   int startMillis, totalMillis, millisElapsed, millisRemaining, hoursElapsed, minsElapsed, hoursRemaining, minsRemaining;
   boolean isActive, hasChangedColour;
@@ -1454,29 +1293,6 @@ class SessionBar {
     }
   }
 }
-
-//    
-//    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
-//
-//    This file is part of IceTimer.
-//    
-//    IceTimer is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
-//    
-//    IceTimer is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//    
-//    You should have received a copy of the GNU General Public License
-//    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
-//    
-//    Joe Cridge, June 2014.
-//    <joe.cridge@me.com>
-//
 
 class Spinner {
   int xPos, yPos, value, minVal, maxVal, step;
