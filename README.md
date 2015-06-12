@@ -12,6 +12,16 @@ easily be modified for use in other situations.
 ![IceTimer 1.2](https://cloud.githubusercontent.com/assets/11491479/8140676/b48eda30-1155-11e5-8531-8b88ca420bf7.png)
 
 
+Features
+--------
+
+- Match scheduling for up to 30 teams.
+- Up to 3 simultaneous matches.
+- Visual indication at 30 and 10 seconds until end of current game.
+- Visual indication at 15 and 5 minutes until end of current session.
+- Easy to read who's next on the ice.
+
+
 Installation
 ------------
 
