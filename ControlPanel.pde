@@ -1,6 +1,6 @@
 //    
 //    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
+//    Copyright (C) 2014 Joe Cridge
 //
 //    This file is part of IceTimer.
 //    
@@ -17,7 +17,7 @@
 //    You should have received a copy of the GNU General Public License
 //    along with IceTimer.  If not, see <http://www.gnu.org/licenses/>.
 //    
-//    Joe Cridge, June 2014.
+//    Joe Cridge, July 2014.
 //    <joe.cridge@me.com>
 //
 

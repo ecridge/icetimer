@@ -1,6 +1,6 @@
 //    
 //    IceTimer - Graphical timer and match scheduler for pick-up ice hockey
-//    Copyright (C) 2014  Joe Cridge
+//    Copyright (C) 2014 Joe Cridge
 //
 //    This file is part of IceTimer.
 //    
