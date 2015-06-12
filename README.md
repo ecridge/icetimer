@@ -39,9 +39,9 @@ can be downloaded from <https://processing.org/download/>.
 Make sure that all of the `.pde` files and the data folder are together within
 the same parent folder – this should already be the case if you have cloned
 the repository or downloaded one of the [archived releases](https://github.com/joecridge/IceTimer/releases).
-Use the IDE to open the file `IceTimer.pde` and choose `Sketch` > `Run` from
+Use the IDE to open the file `IceTimer.pde` and choose 'Sketch' > 'Run' from
 the menu to check that everything is working. You can then export an
-application for your system by choosing `File` > `Export Application`.
+application for your system by choosing 'File' > 'Export Application'.
 
 You can also compile IceTimer directly from its Java source file but you will
 need to install the Processing library to be able to do this.
@@ -51,9 +51,9 @@ Documentation
 -------------
 
 Use the controls at the top of the program interface to enter session details
-and press `START` to begin. The background will turn amber to warn when there
+and press 'START' to begin. The background will turn amber to warn when there
 are 15 minutes left in the session and red when there are 5 minutes left. You
-can end the session by pressing `END` in order to change the session details
+can end the session by pressing 'END' in order to change the session details
 (e.g. if more teams arrive).
 
 The current game is highlighted in the match list and will respond to presses
