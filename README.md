@@ -1,6 +1,8 @@
 [![Latest version](https://img.shields.io/badge/latest-v1.2-brightgreen.svg)](https://github.com/joecridge/IceTimer/releases/latest)
 [![GitHub license](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/joecridge/IceTimer/master/LICENSE.txt)
 
+[*Version 2.0 is in the works &rarr;*](https://github.com/joecridge/IceTimer2)
+
 IceTimer
 ========
 
